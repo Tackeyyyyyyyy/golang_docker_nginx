@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  web:
+    build: ./golang
+    restart: always
+    ports:
+      - 9000:9000
+
+  proxy:
+    build: ./nginx
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 8000:80
+    depends_on:
+      - web
