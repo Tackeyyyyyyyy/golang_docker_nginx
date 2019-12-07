@@ -1,5 +1,3 @@
-
-//main.go
 package main
 
 import (
@@ -17,8 +15,9 @@ type Ping struct {
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", DoHealthCheck).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":9000", router))
 }
+
 func DoHealthCheck(w http.ResponseWriter, r *http.Request) {
 	ping := Ping{http.StatusAccepted, "Request ok"}
 
@@ -32,4 +31,3 @@ func DoHealthCheck(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
 }
-
